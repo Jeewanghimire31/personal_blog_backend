@@ -1,8 +1,8 @@
-import { NextFunction, Request, Response, Router } from "express";
+import { Request, Response, Router } from "express";
 
 const router = Router();
 
-router.get("/", (req: Request, res: Response, next: NextFunction) => {
+router.get("/", (req: Request, res: Response) => {
   res.send({
     message: "Welcome to Blog API V0.0.1",
   });

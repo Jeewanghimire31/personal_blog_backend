@@ -1,17 +1,25 @@
-import { Blog } from "../entities/Blog";
+import Blog from "../entities/Blog.entity";
+
+interface BlogBody {
+  title: string;
+  content: string;
+}
 
 class BlogService {
-  constructor() {}
-
-  async mockCreate() {
-    return await Blog.create({
-      title: "Hello World",
-      content: "Test Test",
-    }).save();
+  // eslint-disable-next-line class-methods-use-this
+  async getBlogs() {
+    // SELECT * FROM Blogs
+    const blogs = await Blog.find();
+    return blogs;
   }
 
-  async getBlogs() {
-    return await Blog.find();
+  // eslint-disable-next-line class-methods-use-this
+  async insert(body: BlogBody) {
+    // Insert into blog(title,content) values(body.title,body.content)
+    await Blog.create({
+      content: body.content,
+      title: body.title,
+    }).save();
   }
 }
 
