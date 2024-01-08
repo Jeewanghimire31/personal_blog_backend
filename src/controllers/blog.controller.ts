@@ -10,10 +10,20 @@ export const getBlogs = async (req: Request, res: Response) => {
   });
 };
 
-export const insertBlog = async (req: Request, res: Response) => {
-  const { body } = req.body;
+export const getBlogById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const data = await blogService.getBlogById(Number(id));
+  res.send({
+    success: true,
+    message: "Todos fetched successfully",
+    data,
+  });
+};
+
+export const postBlog = async (req: Request, res: Response) => {
+  const { title, content } = req.body;
   // console.log(body);
-  const response = await blogService.insert(body);
+  const response = await blogService.postTodo({ title, content });
   res.send({
     success: true,
     message: "Blog created successfully",

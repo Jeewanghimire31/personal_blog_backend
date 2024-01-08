@@ -14,11 +14,22 @@ class BlogService {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  async insert(body: BlogBody) {
+  async getBlogById(blogId: number) {
+    // If id undefined=>firstRow
+    const blog = await Blog.findOne({
+      where: {
+        blog_id: blogId,
+      },
+    });
+    return blog;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  async postTodo(body: BlogBody) {
     // Insert into blog(title,content) values(body.title,body.content)
     await Blog.create({
-      content: body.content,
       title: body.title,
+      content: body.content,
     }).save();
   }
 }
