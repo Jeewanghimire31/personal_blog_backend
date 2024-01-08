@@ -1,12 +1,11 @@
-import { config } from "dotenv";
 import express from "express";
 import "reflect-metadata";
-import { AppDataSource } from "./configs/database.config";
-import { initializeRoutes } from "./routes";
-// Load environment variables
-config();
+import AppDataSource from "./configs/database.config";
+import initializeRoutes from "./routes";
 
 const app = express();
+
+app.use(express.json());
 
 initializeRoutes(app);
 
