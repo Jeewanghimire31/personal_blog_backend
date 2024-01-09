@@ -8,6 +8,11 @@ import {
 import Blog from "./Blog.entity";
 import Comment from "./Comment.entity";
 
+enum UserRole {
+  ADMIN = "admin",
+  LOGGED_IN_USER = "logged_in_user",
+}
+
 @Entity()
 export default class User extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -25,6 +30,14 @@ export default class User extends BaseEntity {
 
   @Column()
   password: string;
+
+
+  @Column({
+    type: "enum",
+    enum: UserRole,
+    default: UserRole.LOGGED_IN_USER,
+  })
+  role: UserRole;
 
   @Column({ default: () => "CURRENT_TIMESTAMP" })
   created_at: Date;
