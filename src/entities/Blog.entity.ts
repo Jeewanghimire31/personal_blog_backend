@@ -12,23 +12,23 @@ import User from "./User.entity";
 @Entity()
 export default class Blog extends BaseEntity {
   @PrimaryGeneratedColumn()
-    blog_id: number;
+  blog_id: number;
 
   @Column()
-    title: string;
+  title: string;
 
   @Column("text")
-    content: string;
+  content: string;
 
   @ManyToOne(() => User, (user) => user.blogs)
-    author: User;
+  author: User;
 
   @Column({ default: () => "CURRENT_TIMESTAMP" })
-    created_at: Date;
+  created_at: Date;
 
   @Column({ default: () => "CURRENT_TIMESTAMP", onUpdate: "CURRENT_TIMESTAMP" })
-    updated_at: Date;
+  updated_at: Date;
 
   @OneToMany(() => Comment, (comment) => comment.blog)
-    comments: Comment[];
+  comments: Comment[];
 }
