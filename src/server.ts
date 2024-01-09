@@ -2,12 +2,15 @@ import express from "express";
 import "reflect-metadata";
 import AppDataSource from "./configs/database.config";
 import initializeRoutes from "./routes";
+import { errorHandlerMiddleware } from "./middleware/errorHandler.middleware";
 
 const app = express();
 
 app.use(express.json());
 
 initializeRoutes(app);
+
+app.use(errorHandlerMiddleware);
 
 app.listen(process.env.PORT, async () => {
   try {
