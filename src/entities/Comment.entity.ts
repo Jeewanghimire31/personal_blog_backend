@@ -1,4 +1,3 @@
-// comment.entity.ts
 import {
   BaseEntity,
   Column,
@@ -12,20 +11,20 @@ import User from "./User.entity";
 @Entity()
 export default class Comment extends BaseEntity {
   @PrimaryGeneratedColumn()
-    comment_id: number;
+  comment_id: number;
 
   @ManyToOne(() => Blog, (blog) => blog.comments)
-    blog: Blog;
+  blog: Blog;
 
   @ManyToOne(() => User, (user) => user.comments)
-    user: User;
+  user: User;
 
   @Column("text")
-    content: string;
+  content: string;
 
   @Column({ default: () => "CURRENT_TIMESTAMP" })
-    created_at: Date;
+  created_at: Date;
 
   @Column({ default: () => "CURRENT_TIMESTAMP", onUpdate: "CURRENT_TIMESTAMP" })
-    updated_at: Date;
+  updated_at: Date;
 }

@@ -21,7 +21,10 @@
         "object-curly-newline": ["error", { "multiline": true, "consistent": true }],
         "indent": [
             "error",
-            2
+            2,
+            {
+                "ignoreNodes":["PropertyDefination"]
+            }
         ],
         "linebreak-style": [
             "error",
