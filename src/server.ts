@@ -1,12 +1,14 @@
+import cors from "cors";
 import express from "express";
 import "reflect-metadata";
 import AppDataSource from "./configs/database.config";
-import initializeRoutes from "./routes";
 import { errorHandlerMiddleware } from "./middleware/errorHandler.middleware";
+import initializeRoutes from "./routes";
 
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 initializeRoutes(app);
 
