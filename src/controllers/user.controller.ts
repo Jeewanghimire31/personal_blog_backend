@@ -33,5 +33,6 @@ export const login = async (req: Request, res: Response) => {
     message: "Login successful",
     accessToken,
     refreshToken,
+    role: user.role,
   });
 };
