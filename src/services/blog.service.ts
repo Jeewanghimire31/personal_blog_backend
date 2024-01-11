@@ -21,10 +21,12 @@ class BlogService {
         blog_id: blogId,
       },
     });
+    if (!blog) {
+      throw new NotFoundException("Blog not Found");
+    }
     return blog;
   }
 
-  // eslint-disable-next-line class-methods-use-this
   async postBlog(body: any) {
     //* Insert into blog(title,content) values(body.title,body.content) works like this.
     await Blog.create({
@@ -35,9 +37,9 @@ class BlogService {
 
   async updateBlog(id: number, body: BlogBody) {
     const blog = await this.getBlogById(id);
-    if (!blog) {
-      throw new NotFoundException("Blog not Found");
-    }
+    // if (!blog) {
+    //   throw new NotFoundException("Blog not Found");
+    // }
     // console.log("hello", blog, body);
     // blog.title = body.title;
     // blog.content = body.content;

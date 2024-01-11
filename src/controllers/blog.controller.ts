@@ -55,7 +55,7 @@ export const postBlog = async (
   }
 };
 
-export const updateTodo = async (
+export const updateBlog = async (
   req: Request,
   res: Response,
   next: NextFunction,

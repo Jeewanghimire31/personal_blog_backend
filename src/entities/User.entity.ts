@@ -8,7 +8,7 @@ import {
 import Blog from "./Blog.entity";
 import Comment from "./Comment.entity";
 
-enum UserRole {
+export enum UserRole {
   ADMIN = "admin",
   LOGGED_IN_USER = "logged_in_user",
 }
