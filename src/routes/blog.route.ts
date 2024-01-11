@@ -4,7 +4,7 @@ import {
   getBlogById,
   getBlogs,
   postBlog,
-  updateTodo,
+  updateBlog,
 } from "../controllers/blog.controller";
 
 const router = Router();
@@ -15,7 +15,7 @@ router.get("/:id", getBlogById);
 
 router.post("/", postBlog);
 
-router.put("/:id", updateTodo);
+router.put("/:id", updateBlog);
 
 router.delete("/:id", deleteBlog)
 
