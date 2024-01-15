@@ -6,6 +6,8 @@ import { errorHandlerMiddleware } from "./middleware/errorHandler.middleware";
 import initializeRoutes from "./routes";
 
 const app = express();
+//Static files
+app.use(express.static("src/public/uploads/"));
 
 app.use(express.json());
 app.use(cors());
