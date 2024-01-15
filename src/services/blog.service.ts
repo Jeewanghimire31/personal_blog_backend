@@ -1,4 +1,4 @@
-import { In } from "typeorm";
+import { ILike, In } from "typeorm";
 import Blog from "../entities/Blog.entity";
 import { Media } from "../entities/Media.entity";
 import { NotFoundException } from "../exceptions";
@@ -10,10 +10,13 @@ interface BlogBody {
 }
 
 class BlogService {
-  async getBlogs() {
+  async getBlogs(query: string | undefined) {
     //* SELECT * FROM Blogs Works like this
     const blogs = await Blog.find({
       relations: ["media", "comments", "comments.user"],
+      where: {
+        title: query ? ILike(`%${query}%`) : undefined,
+      },
     });
     return blogs;
   }
@@ -71,6 +74,10 @@ class BlogService {
     } else {
       return await blog.remove();
     }
+  }
+
+  async getTotalCount() {
+    return await Blog.count();
   }
 }
 

@@ -7,7 +7,9 @@ export const getBlogs = async (
   next: NextFunction,
 ) => {
   try {
-    const data = await blogService.getBlogs();
+    const query = req.query?.query as string | undefined;
+    const data = await blogService.getBlogs(query);
+    const totalBlogs = await blogService.getTotalCount();
     res.send({
       success: true,
       message: "Blogs fetched successfully",
@@ -43,7 +45,7 @@ export const postBlog = async (
 ) => {
   const { title, content, media } = req.body;
   try {
-    if (!media && !Array.isArray(media)) {
+    if (media && !Array.isArray(media)) {
       throw new Error("You cannot upload blog without media");
     }
     const response = await blogService.postBlog({ title, content, media });
