@@ -20,7 +20,10 @@ class UserService {
   }
 
   async getUserByEmail(email: string) {
-    return User.findOne({ where: { email } });
+    return User.findOne({
+      where: { email },
+      select: ["user_id", "email", "password", "username"],
+    });
   }
 
   async comparePasswords(candidatePassword: string, hashedPassword: string) {

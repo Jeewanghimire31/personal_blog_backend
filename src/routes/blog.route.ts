@@ -6,9 +6,11 @@ import {
   postBlog,
   updateBlog,
 } from "../controllers/blog.controller";
+import { authenticateUser } from "../middleware/auth.middleware";
 
 const router = Router();
 
+// router.get("/",authenticateUser("admin"), getBlogs);
 router.get("/", getBlogs);
 
 router.get("/:id", getBlogById);

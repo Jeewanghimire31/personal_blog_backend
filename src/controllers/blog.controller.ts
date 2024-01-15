@@ -41,10 +41,12 @@ export const postBlog = async (
   res: Response,
   next: NextFunction,
 ) => {
-  const { title, content } = req.body;
-  // console.log(body);
+  const { title, content, media } = req.body;
   try {
-    const response = await blogService.postBlog({ title, content });
+    if (!media && !Array.isArray(media)) {
+      throw new Error("You cannot upload blog without media");
+    }
+    const response = await blogService.postBlog({ title, content, media });
     res.send({
       success: true,
       message: "Blog created successfully",

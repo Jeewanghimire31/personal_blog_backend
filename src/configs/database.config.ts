@@ -2,6 +2,7 @@ import { DataSource, DataSourceOptions } from "typeorm";
 import serverConfig from "../config";
 import Blog from "../entities/Blog.entity";
 import Comment from "../entities/Comment.entity";
+import { Media } from "../entities/Media.entity";
 import User from "../entities/User.entity";
 
 const { database } = serverConfig;
@@ -19,7 +20,7 @@ export const AppDataSource = new DataSource({
   database: databaseName,
   synchronize: true,
   logging: false,
-  entities: [Blog, User, Comment],
+  entities: [Blog, User, Comment, Media],
   subscribers: [],
   migrations: [],
 } as DataSourceOptions);

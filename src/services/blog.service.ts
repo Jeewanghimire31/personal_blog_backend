@@ -1,4 +1,6 @@
+import { In } from "typeorm";
 import Blog from "../entities/Blog.entity";
+import { Media } from "../entities/Media.entity";
 import { NotFoundException } from "../exceptions";
 
 interface BlogBody {
@@ -9,8 +11,10 @@ interface BlogBody {
 
 class BlogService {
   async getBlogs() {
-    //* SELECT * FROM Blogs Works like this 
-    const blogs = await Blog.find();
+    //* SELECT * FROM Blogs Works like this
+    const blogs = await Blog.find({
+      relations: ["media", "comments", "comments.user"],
+    });
     return blogs;
   }
 
@@ -20,6 +24,7 @@ class BlogService {
       where: {
         blog_id: blogId,
       },
+      relations: ["media", "comments"],
     });
     if (!blog) {
       throw new NotFoundException("Blog not Found");
@@ -28,10 +33,19 @@ class BlogService {
   }
 
   async postBlog(body: any) {
+    let media: Media[] = [];
+    if (body.media) {
+      media = await Media.find({
+        where: {
+          id: In(body.media),
+        },
+      });
+    }
     //* Insert into blog(title,content) values(body.title,body.content) works like this.
     await Blog.create({
       title: body.title,
       content: body.content,
+      media,
     }).save();
   }
 

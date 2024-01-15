@@ -7,6 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import Comment from "./Comment.entity";
+import { Media } from "./Media.entity";
 import User from "./User.entity";
 
 @Entity()
@@ -31,4 +32,7 @@ export default class Blog extends BaseEntity {
 
   @OneToMany(() => Comment, (comment) => comment.blog)
   comments: Comment[];
+
+  @OneToMany(() => Media, (media) => media.blog)
+  media: Media[];
 }
