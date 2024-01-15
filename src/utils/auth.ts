@@ -9,7 +9,7 @@ export const generateAccessToken = (user: User): string => {
 
 export const generateRefreshToken = (user: User): string => {
   const payload = { userId: user.user_id, username: user.username, role:user.role };
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: "200s" }); // Adjust the expiration time as needed
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: "1111s" }); // Adjust the expiration time as needed
 };
 
 export const verifyAccessToken = (token: string): User => {
