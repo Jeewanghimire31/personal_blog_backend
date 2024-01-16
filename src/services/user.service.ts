@@ -22,7 +22,7 @@ class UserService {
   async getUserByEmail(email: string) {
     return User.findOne({
       where: { email },
-      select: ["user_id", "email", "password", "username"],
+      select: ["user_id", "email", "password", "username", "role"],
     });
   }
 
